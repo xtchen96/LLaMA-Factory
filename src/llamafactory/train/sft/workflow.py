@@ -27,7 +27,7 @@ from ...model import load_model, load_tokenizer
 from ..trainer_utils import create_modelcard_and_push
 from .metric import ComputeMetrics, compute_accuracy, eval_logit_processor
 from .trainer import CustomSeq2SeqTrainer
-
+from ...model.model_utils.packing import configure_packing
 
 if TYPE_CHECKING:
     from transformers import Seq2SeqTrainingArguments, TrainerCallback
@@ -47,6 +47,9 @@ def run_sft(
     tokenizer = tokenizer_module["tokenizer"]
     dataset = get_dataset(model_args, data_args, training_args, stage="sft", **tokenizer_module)
     model = load_model(tokenizer, model_args, finetuning_args, training_args.do_train)
+
+    if data_args.efficient_packing:
+        configure_packing(model.config)
 
     if training_args.predict_with_generate:
         tokenizer.padding_side = "left"  # use left-padding in generation

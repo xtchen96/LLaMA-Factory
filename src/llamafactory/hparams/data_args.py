@@ -97,9 +97,9 @@ class DataArguments:
             "help": "Whether or not to pack the sequences in training. Will automatically enable in pre-training."
         },
     )
-    tool_format: Optional[str] = field(
+    efficient_packing: Optional[bool] = field(
         default=None,
-        metadata={"help": "Tool format to use for constructing function calling examples."},
+        metadata={"help": "Whether or not to pack the sequences without cross-contamination attention for efficient training."},
     )
     tokenized_path: Optional[str] = field(
         default=None,
