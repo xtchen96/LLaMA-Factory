@@ -80,6 +80,21 @@ class CustomSeq2SeqTrainer(Seq2SeqTrainer):
         if self.processor is not None:
             getattr(self.processor, "image_processor").save_pretrained(output_dir)
 
+    def training_step(self, *args, **kwargs):
+        r"""
+        Update the reference to deepspeed optimizer
+        """
+        if self.finetuning_args.use_badam and \
+            self.args.deepspeed_plugin is not None and \
+            self.args.deepspeed_plugin.zero_stage == 3:
+            
+            ds_optim = self.optimizer.optimizer
+            badam_optim = ds_optim.optimizer
+            badam_optim.ds_optimizer = ds_optim
+        
+        return super().training_step(*args, **kwargs)
+            
+
     def prediction_step(
         self,
         model: "torch.nn.Module",
