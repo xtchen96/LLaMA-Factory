@@ -1,0 +1,19 @@
+### model
+model_name_or_path: NousResearch/Meta-Llama-3-8B-Instruct #meta-llama/Meta-Llama-3-8B-Instruct
+adapter_name_or_path: saves/llama3-8b/full/sft
+
+### method
+finetuning_type: full
+
+### dataset
+task: mmlu
+split: test
+template: llama3
+lang: en
+n_shot: 5
+
+### output
+save_dir: saves/llama3-8b/full/eval/cmmlu
+
+### eval
+batch_size: 4

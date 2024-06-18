@@ -1,4 +1,7 @@
 {
+  "alpaca": {
+    "file_name": "alpaca_data.json"
+  },
   "identity": {
     "file_name": "identity.json"
   },
