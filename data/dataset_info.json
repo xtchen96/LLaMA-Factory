@@ -2,6 +2,9 @@
   "alpaca": {
     "file_name": "alpaca_data.json"
   },
+  "alpaca_eval": {
+    "file_name": "alpaca_eval.json"
+  },
   "identity": {
     "file_name": "identity.json"
   },

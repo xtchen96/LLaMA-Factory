@@ -136,9 +136,6 @@ def load_single_dataset(
     if data_args.max_samples is not None:  # truncate dataset
         max_samples = min(data_args.max_samples, len(dataset))
         dataset = dataset.select(range(max_samples))
-        print(f'################# dataset is truncated to {max_samples} #################\n\n\n')
-    else:
-        print(f'################# dataset original length {len(dataset)} #################\n\n\n')
 
     return align_dataset(dataset, dataset_attr, data_args, training_args)
 

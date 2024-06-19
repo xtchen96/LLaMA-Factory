@@ -29,6 +29,7 @@ logger = get_logger(__name__)
 
 
 def configure_attn_implementation(config: "PretrainedConfig", model_args: "ModelArguments") -> None:
+    print(f'model_args.flash_attn: {model_args.flash_attn}\n\n')
     if model_args.flash_attn == "auto":
         return
 

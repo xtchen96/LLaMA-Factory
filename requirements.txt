@@ -1,8 +1,11 @@
+packaging
+torch
+metrics
 transformers>=4.41.2
 datasets>=2.16.0
 accelerate>=0.30.1
 peft>=0.11.1
-trl>=0.8.6
+trl>=0.8.63
 gradio>=4.0.0
 numpy==1.26.4
 scipy
@@ -16,8 +19,8 @@ fastapi
 sse-starlette
 matplotlib>=3.7.0
 fire
-packaging
 pyyaml
 flash_attn
 deepspeed
 wandb
+alpaca-eval
