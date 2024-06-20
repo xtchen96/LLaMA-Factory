@@ -91,12 +91,10 @@ def patch_config(
 
     # cast data type of the model if:
     # 1. not deepspeed zero3 and not fsdp (keep zero3 or fsdp in float32)
-    # 2. fsdp + qlora
-    # if model_args.quantization_bit is not None or (not is_deepspeed_zero3_enabled() and not is_fsdp_enabled()):
-    #     init_kwargs["torch_dtype"] = model_args.compute_dtype
-    # solve flash_attn2 float16 dtype problem: according to issue: https://github.com/hiyouga/LLaMA-Factory/issues/4244
-    init_kwargs["torch_dtype"] = model_args.compute_dtype
-    if model_args.quantization_bit is not None or (not is_deepspeed_zero3_enabled() and not is_fsdp_enabled()):
+    # 2. quantization_bit is not None (qlora)
+    if (not is_deepspeed_zero3_enabled() and not is_fsdp_enabled()) or model_args.quantization_bit is not None:
+        init_kwargs["torch_dtype"] = model_args.compute_dtype
+
         if init_kwargs["low_cpu_mem_usage"]:  # device map requires low_cpu_mem_usage=True
             if "device_map" not in init_kwargs and model_args.device_map:
                 init_kwargs["device_map"] = model_args.device_map
