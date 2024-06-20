@@ -4,10 +4,16 @@ import json
 # set your api key here
 os.environ['OPENAI_API_KEY'] = 'api_key'
 
-# subject to change according to llm model
-output_generator_name = 'llama3-8b-baseline'
-output_dir = 'saves/llama3-8b/full/alpaca_eval_baseline'
-output_eval_dir = output_generator_name + '-alpacaeval'
+# subject to change according to llm model, output_dir needs to match the 'output_dir' in yaml_file
+
+# baseline model
+# output_generator_name = 'llama3-8b-sft-baseline'
+# output_dir = 'saves/llama3-8b/full/alpaca_eval_baseline'
+# yaml_file = 'examples/sft_exp/llama3_full_sft_alpaca_eval_baseline.yaml' 
+# sft model
+output_generator_name = 'llama3-8b-sft'
+output_dir = 'saves/llama3-8b/full/alpaca_eval_sft'
+yaml_file = 'examples/sft_exp/llama3_full_sft_alpaca_eval.yaml' 
 
 # should stay const
 gpt_generator_name = 'gpt4_1106_preview'
@@ -21,6 +27,11 @@ gpt_result_convert_file = 'annotations_converted.json'
 gpt_result_fmt_file = 'gpt_output.json'
 
 reference_fmt_file = 'data/alpaca_eval.json'
+
+output_eval_dir = 'alpacaeval'
+
+if not os.path.exists(f'{output_dir}/{output_file}'):
+    os.system(f'llamafactory-cli train {yaml_file}')
 
 # convert output jsonl to json format
 if not os.path.exists(f'{output_dir}/{output_file[:-1]}'):
