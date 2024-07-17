@@ -8,7 +8,6 @@ peft>=0.11.1
 trl>=0.8.63
 gradio>=4.0.0
 numpy
-panda>=2.0.0
 scipy
 einops
 sentencepiece
