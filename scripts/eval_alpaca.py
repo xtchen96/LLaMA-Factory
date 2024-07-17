@@ -2,7 +2,7 @@ import os
 import json
 
 # set your api key here
-os.environ['OPENAI_API_KEY'] = 'api_key'
+os.environ['OPENAI_API_KEY'] = 'your api key'
 
 # subject to change according to llm model, output_dir needs to match the 'output_dir' in yaml_file
 

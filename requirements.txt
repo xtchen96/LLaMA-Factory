@@ -19,6 +19,9 @@ fastapi
 sse-starlette
 matplotlib>=3.7.0
 fire
+jieba
+nltk
+rouge-chinese
 pyyaml
 flash_attn
 deepspeed
