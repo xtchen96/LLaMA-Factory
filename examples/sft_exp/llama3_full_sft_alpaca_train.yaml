@@ -1,5 +1,6 @@
 ### model
-model_name_or_path: meta-llama/Meta-Llama-3-8B-Instruct
+model_name_or_path: meta-llama/Meta-Llama-3-8B
+resize_vocab: true # from https://github.com/hiyouga/LLaMA-Factory/issues/3022
 
 ### method
 stage: sft
@@ -11,35 +12,35 @@ flash_attn: fa2
 ### dataset
 dataset: alpaca
 template: llama3
-cutoff_len: 1024
+cutoff_len: 2048
 # max_samples: 1000
 packing: true
 overwrite_cache: true
 preprocessing_num_workers: 16
-tokenized_path: saves/llama3-8b/dataset/alpaca
+# tokenized_path: saves/llama3-8b/dataset/alpaca
 
 ### output
 output_dir: saves/llama3-8b/full/sft
-logging_steps: 50
-save_steps: 8000
+logging_steps: 10
+save_steps: 10000 # larger than training steps, just save once at last
 plot_loss: true
 overwrite_output_dir: true
 
 ### train
 per_device_train_batch_size: 1
 gradient_accumulation_steps: 1
-learning_rate: 1.0e-4
+learning_rate: 5.0e-5
 num_train_epochs: 3.0
 lr_scheduler_type: cosine
-warmup_ratio: 0.1
-fp16: true
-ddp_timeout: 180000000
+warmup_ratio: 0.03
+weight_decay: 0.01
+max_grad_norm: 1.0
+bf16: true
+optim: paged_adamw_32bit
+ddp_timeout: 5400
 
 ### eval
-val_size: 0.1
-per_device_eval_batch_size: 1
-eval_strategy: steps
-eval_steps: 100000
+eval_strategy: 'no'
 
 ### wandb
 report_to: wandb

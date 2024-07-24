@@ -1,14 +1,14 @@
 ### model
-model_name_or_path: meta-llama/Meta-Llama-3-8B-Instruct
-adapter_name_or_path: saves/llama3-8b/full/sft
+model_name_or_path: meta-llama/Meta-Llama-3-8B
 
 ### method
 stage: sft
 do_predict: true
 finetuning_type: full
+# flash_attn: fa2
 
 ### dataset
-dataset: alpaca_eval #identity,alpaca_en_demo
+eval_dataset: alpaca_eval #identity,alpaca_en_demo
 template: llama3
 cutoff_len: 1024
 # max_samples: 50
@@ -20,6 +20,8 @@ output_dir: saves/llama3-8b/full/alpaca_eval_sft
 overwrite_output_dir: true
 
 ### eval
-per_device_eval_batch_size: 1
+per_device_eval_batch_size: 16
 predict_with_generate: true
 # ddp_timeout: 180000000
+
+report_to: none

@@ -24,3 +24,10 @@ flash_attn
 deepspeed
 wandb
 alpaca-eval
+huggingface-hub
+bitsandbytes
+evaluate
+nvitop
+jieba
+nltk
+rouge-chinese
